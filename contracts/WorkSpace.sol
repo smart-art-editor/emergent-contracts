@@ -21,7 +21,7 @@ contract WorkSpace{
     event VideoAdded(uint256 workspaceId, string videoId);
     event ParticipantAdded(uint256 workspaceId, address participant);
 
-    function createWorkspace(string memory _name,address  _initialParticipant) public {
+    function createWorkspace(string memory _name,address  _initialParticipant, string memory _videoId) public {
         uint256 newWorkspaceId = workspaceCount;
     
     // Create a new Video_WorkSpace struct and push it to the array
@@ -35,6 +35,7 @@ contract WorkSpace{
     // Add the initial participant (creator)
     workspaces[newWorkspaceId].participants.push(_initialParticipant);
     participantWorkspaces[_initialParticipant].push(newWorkspaceId);
+    workspaces[newWorkspaceId].videoIds.push(_videoId);
 
     // Update creator information
     creators[msg.sender].creatorAddress = msg.sender;
